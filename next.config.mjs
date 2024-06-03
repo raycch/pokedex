@@ -1,4 +1,21 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+import NextBundleAnalyzer from "@next/bundle-analyzer";
 
-export default nextConfig;
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        port: "",
+        pathname: "/PokeAPI/**",
+      },
+    ],
+  },
+};
+
+export default withBundleAnalyzer(nextConfig);
